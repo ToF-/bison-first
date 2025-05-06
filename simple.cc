@@ -1345,8 +1345,12 @@ switch (yykind)
         {
         case 0:
           return parser::make_TEXT ("I have three numbers for you.");
-        case 1: case 2: case 3:
+        case 1:
           return parser::make_NUMBER (stage);
+        case 2:
+            return parser::make_TEXT ("00110100");
+        case 3:
+            return parser::make_TEXT ("00100");
         case 4:
           return parser::make_TEXT ("And that's all!");
         default:
@@ -1355,7 +1359,7 @@ switch (yykind)
     }
   }
 
-#line 1359 "simple.cc"
+#line 1363 "simple.cc"
 
 
 #ifndef YY_
@@ -1428,7 +1432,7 @@ switch (yykind)
 #define YYRECOVERING()  (!!yyerrstatus_)
 
 namespace yy {
-#line 1432 "simple.cc"
+#line 1436 "simple.cc"
 
   /// Build a parser object.
   parser::parser ()
@@ -1872,37 +1876,37 @@ namespace yy {
           switch (yyn)
             {
   case 2: // result: list
-#line 69 "simple.yy"
-        { std::cout << yystack_[0].value.as < std::vector<std::string> > () << '\n'; }
-#line 1878 "simple.cc"
+#line 73 "simple.yy"
+            { std::cout << yystack_[0].value.as < std::vector<std::string> > () << '\n'; }
+#line 1882 "simple.cc"
     break;
 
   case 3: // list: %empty
-#line 74 "simple.yy"
-             { /* Generates an empty string list */ }
-#line 1884 "simple.cc"
+#line 78 "simple.yy"
+               { /* Generates an empty string list */ }
+#line 1888 "simple.cc"
     break;
 
   case 4: // list: list item
-#line 75 "simple.yy"
+#line 79 "simple.yy"
              { yylhs.value.as < std::vector<std::string> > () = yystack_[1].value.as < std::vector<std::string> > (); yylhs.value.as < std::vector<std::string> > ().push_back (yystack_[0].value.as < std::string > ()); }
-#line 1890 "simple.cc"
+#line 1894 "simple.cc"
     break;
 
   case 5: // item: TEXT
-#line 82 "simple.yy"
-  { yylhs.value.as < std::string > () = yystack_[0].value.as < std::string > (); }
-#line 1896 "simple.cc"
+#line 86 "simple.yy"
+    { yylhs.value.as < std::string > () = yystack_[0].value.as < std::string > (); }
+#line 1900 "simple.cc"
     break;
 
   case 6: // item: NUMBER
-#line 83 "simple.yy"
+#line 87 "simple.yy"
           { yylhs.value.as < std::string > () = std::to_string (yystack_[0].value.as < int > ()); }
-#line 1902 "simple.cc"
+#line 1906 "simple.cc"
     break;
 
 
-#line 1906 "simple.cc"
+#line 1910 "simple.cc"
 
             default:
               break;
@@ -2166,7 +2170,7 @@ namespace yy {
   const signed char
   parser::yyrline_[] =
   {
-       0,    69,    69,    74,    75,    82,    83
+       0,    73,    73,    78,    79,    86,    87
   };
 
   void
@@ -2198,9 +2202,9 @@ namespace yy {
 
 
 } // yy
-#line 2202 "simple.cc"
+#line 2206 "simple.cc"
 
-#line 85 "simple.yy"
+#line 89 "simple.yy"
 
 namespace yy
 {
