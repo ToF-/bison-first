@@ -7,3 +7,8 @@ rpcalc: rpcalc.y
 	mkdir -p bin
 	bison rpcalc.y
 	cc -lm -o bin/rpcalc rpcalc.tab.c
+
+loner: loner.y
+	mkdir -p bin
+	bison loner.y
+	cc -lm -o bin/loner loner.tab.c

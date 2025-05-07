@@ -2,6 +2,7 @@
 
 %{
     #include <stdio.h>
+    #include <stdlib.h>
     #include <math.h>
     int yylex(void);
     void yyerror(char const *);
