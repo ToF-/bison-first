@@ -22,34 +22,32 @@ input:
      ;
 
 boards:
-    | boards board
+    %empty
+    | boards BOARD_SIZE { line_count++; winnable = 1; printf("BOARD_SIZE\n"); }
+    board               { line_count++; }
     ;
 
 board:
-    BOARD_SIZE                          { line_count++; winnable = 1; printf("BOARD_SIZE\n"); }
-    e_star board_pattern e_star '\n'    { line_count++; printf("%s\n", winnable ? "yes" : "no"); }
-    ;
-
-e_star:
-    %empty
-  | e_star E
-  ;
-
-board_pattern:
-    P
+    win                                 { printf("yes\n"); }
+  | lose                                { printf("no\n"); }
+    
+win:
+   P
   | P P E
-  | E P P
-  | otherwise
+  | e_plus P P E
+  | e_plus P P E e_plus
+  | e_plus E P P e_plus
   ;
 
-otherwise:
+e_plus:
   %empty
-  | otherwise any                         { winnable = 0; printf("otherwise\n"); }
+  | E e_plus        { printf("0+\n"); }
   ;
 
-any:
-    E
-  | P
+lose:
+  %empty
+  | E lose
+  | P lose
   ;
 
 %%

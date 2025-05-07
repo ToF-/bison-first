@@ -151,17 +151,15 @@ enum yysymbol_kind_t
   YYSYMBOL_P = 4,                          /* P  */
   YYSYMBOL_TEST_CASES = 5,                 /* TEST_CASES  */
   YYSYMBOL_BOARD_SIZE = 6,                 /* BOARD_SIZE  */
-  YYSYMBOL_7_n_ = 7,                       /* '\n'  */
-  YYSYMBOL_YYACCEPT = 8,                   /* $accept  */
-  YYSYMBOL_input = 9,                      /* input  */
-  YYSYMBOL_10_1 = 10,                      /* $@1  */
-  YYSYMBOL_boards = 11,                    /* boards  */
+  YYSYMBOL_YYACCEPT = 7,                   /* $accept  */
+  YYSYMBOL_input = 8,                      /* input  */
+  YYSYMBOL_9_1 = 9,                        /* $@1  */
+  YYSYMBOL_boards = 10,                    /* boards  */
+  YYSYMBOL_11_2 = 11,                      /* $@2  */
   YYSYMBOL_board = 12,                     /* board  */
-  YYSYMBOL_13_2 = 13,                      /* $@2  */
-  YYSYMBOL_e_star = 14,                    /* e_star  */
-  YYSYMBOL_board_pattern = 15,             /* board_pattern  */
-  YYSYMBOL_otherwise = 16,                 /* otherwise  */
-  YYSYMBOL_any = 17                        /* any  */
+  YYSYMBOL_win = 13,                       /* win  */
+  YYSYMBOL_e_plus = 14,                    /* e_plus  */
+  YYSYMBOL_lose = 15                       /* lose  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -489,16 +487,16 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  4
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   18
+#define YYLAST   26
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  8
+#define YYNTOKENS  7
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  10
+#define YYNNTS  9
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  17
+#define YYNRULES  18
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  24
+#define YYNSTATES  30
 
 /* YYMAXUTOK -- Last valid token kind.  */
 #define YYMAXUTOK   261
@@ -516,7 +514,7 @@ union yyalloc
 static const yytype_int8 yytranslate[] =
 {
        0,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       7,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -548,8 +546,8 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    20,    20,    20,    24,    25,    29,    29,    34,    35,
-      39,    40,    41,    42,    46,    47,    51,    52
+       0,    20,    20,    20,    25,    26,    26,    31,    32,    35,
+      36,    37,    38,    39,    43,    44,    48,    49,    50
 };
 #endif
 
@@ -566,8 +564,8 @@ static const char *yysymbol_name (yysymbol_kind_t yysymbol) YY_ATTRIBUTE_UNUSED;
 static const char *const yytname[] =
 {
   "\"end of file\"", "error", "\"invalid token\"", "E", "P", "TEST_CASES",
-  "BOARD_SIZE", "'\\n'", "$accept", "input", "$@1", "boards", "board",
-  "$@2", "e_star", "board_pattern", "otherwise", "any", YY_NULLPTR
+  "BOARD_SIZE", "$accept", "input", "$@1", "boards", "$@2", "board", "win",
+  "e_plus", "lose", YY_NULLPTR
 };
 
 static const char *
@@ -577,7 +575,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-4)
+#define YYPACT_NINF (-8)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -591,9 +589,9 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-       3,    -4,     7,    -4,    -4,     4,    -4,    -4,    -4,    -2,
-      -1,     5,    -4,     2,     8,    10,    -3,    -4,    -4,    -4,
-      -4,    -4,    -4,    -4
+      -3,    -8,    11,    -8,    -8,    16,    -8,     1,     3,     6,
+      -8,    -8,    10,    -8,    12,    -8,    -8,    12,    17,    -8,
+      13,    19,    12,    20,    22,    23,    23,    23,    -8,    -8
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -601,21 +599,21 @@ static const yytype_int8 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,     2,     0,     4,     1,     3,     6,     5,     8,    14,
-       9,    10,     8,    13,     0,     0,     0,    16,    17,    15,
-      12,    11,     9,     7
+       0,     2,     0,     4,     1,     3,     5,    16,    16,     9,
+       6,     7,     0,     8,    16,    15,    17,    16,    16,    18,
+       0,     0,    10,     0,     0,    14,    11,    14,    13,    12
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-      -4,    -4,    -4,    -4,    -4,    -4,     6,    -4,    -4,    -4
+      -8,    -8,    -8,    -8,    -8,    -8,    -8,    -7,    -6
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     2,     3,     5,     7,     8,     9,    12,    13,    19
+       0,     2,     3,     5,     7,    10,    11,    15,    16
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -623,37 +621,39 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      22,    10,    11,    14,    23,    17,    18,     4,     1,    15,
-       6,     0,    20,    21,     0,     0,     0,     0,    16
+      12,    13,     1,    19,     8,     9,     8,    14,    19,    17,
+      18,     4,    19,    20,    21,    17,    14,    23,    28,    29,
+      22,    14,     6,    24,    25,    26,    27
 };
 
 static const yytype_int8 yycheck[] =
 {
-       3,     3,     4,     4,     7,     3,     4,     0,     5,     4,
-       6,    -1,     4,     3,    -1,    -1,    -1,    -1,    12
+       7,     7,     5,     9,     3,     4,     3,     4,    14,     3,
+       4,     0,    18,     3,     4,     3,     4,     4,    25,    26,
+       3,     4,     6,     4,     4,     3,     3
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     5,     9,    10,     0,    11,     6,    12,    13,    14,
-       3,     4,    15,    16,     4,     4,    14,     3,     4,    17,
-       4,     3,     3,     7
+       0,     5,     8,     9,     0,    10,     6,    11,     3,     4,
+      12,    13,    14,    15,     4,    14,    15,     3,     4,    15,
+       3,     4,     3,     4,     4,     4,     3,     3,    14,    14
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,     8,    10,     9,    11,    11,    13,    12,    14,    14,
-      15,    15,    15,    15,    16,    16,    17,    17
+       0,     7,     9,     8,    10,    11,    10,    12,    12,    13,
+      13,    13,    13,    13,    14,    14,    15,    15,    15
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     0,     3,     0,     2,     0,     6,     0,     2,
-       1,     3,     3,     1,     0,     2,     1,     1
+       0,     2,     0,     3,     0,     0,     4,     1,     1,     1,
+       3,     4,     5,     5,     0,     2,     0,     2,     2
 };
 
 
@@ -1122,26 +1122,38 @@ yyreduce:
 #line 1123 "loner.tab.c"
     break;
 
-  case 6: /* $@2: %empty  */
-#line 29 "loner.y"
-                                        { line_count++; winnable = 1; printf("BOARD_SIZE\n"); }
+  case 5: /* $@2: %empty  */
+#line 26 "loner.y"
+                        { line_count++; winnable = 1; printf("BOARD_SIZE\n"); }
 #line 1129 "loner.tab.c"
     break;
 
-  case 7: /* board: BOARD_SIZE $@2 e_star board_pattern e_star '\n'  */
-#line 30 "loner.y"
-                                        { line_count++; printf("%s\n", winnable ? "yes" : "no"); }
+  case 6: /* boards: boards BOARD_SIZE $@2 board  */
+#line 27 "loner.y"
+                        { line_count++; }
 #line 1135 "loner.tab.c"
     break;
 
-  case 15: /* otherwise: otherwise any  */
-#line 47 "loner.y"
-                                          { winnable = 0; printf("otherwise\n"); }
+  case 7: /* board: win  */
+#line 31 "loner.y"
+                                        { printf("yes\n"); }
 #line 1141 "loner.tab.c"
     break;
 
+  case 8: /* board: lose  */
+#line 32 "loner.y"
+                                        { printf("no\n"); }
+#line 1147 "loner.tab.c"
+    break;
 
-#line 1145 "loner.tab.c"
+  case 15: /* e_plus: E e_plus  */
+#line 44 "loner.y"
+                    { printf("0+\n"); }
+#line 1153 "loner.tab.c"
+    break;
+
+
+#line 1157 "loner.tab.c"
 
       default: break;
     }
@@ -1334,7 +1346,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 55 "loner.y"
+#line 53 "loner.y"
 
 
 #include <ctype.h>
