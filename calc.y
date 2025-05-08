@@ -1,39 +1,39 @@
-/* reverse polish notation calculator */
+/* infix notation calculator */
 
 %{
+    #include <math.h>
     #include <stdio.h>
     #include <stdlib.h>
-    #include <math.h>
     int yylex(void);
     void yyerror(char const *);
 %}
 
-%define api.value.type {double}
+%define api.value.type { double }
 %token NUM
+%left '-' '+'
+%left '*' '/'
+%precedence NEG 
+%right '^'
 
 %%
 
-
 input:
-    %empty
-  | input line
-  ;
-
-line:
     '\n'
-  | exp '\n'        { printf("%.10g\n", $1); }
+  | exp '\n'            { printf("\t%.10g\n", $1); }
+  | error '\n'          { printf("there is an error\n"); exit(0); }
   ;
 
 exp:
     NUM
-  | exp exp '+'     { $$ = $1 + $2; }
-  | exp exp '-'     { $$ = $1 - $2; }
-  | exp exp '*'     { $$ = $1 * $2; }
-  | exp exp '/'     { $$ = $1 / $2; }
-  | exp exp '^'     { $$ = pow($1, $2); }
-  | exp 'n'         { $$ = -$1; }
+  | exp '+' exp        { $$ = $1 + $2; }
+  | exp '-' exp        { $$ = $1 - $2; }
+  | exp '*' exp        { $$ = $1 * $2; }
+  | exp '/' exp        { $$ = $1 / $2; }
+  | '-' exp %prec NEG  { $$ = -$2; }
+  | exp '^' exp        { $$ = pow($1, $3); }
+  | '(' exp ')'        { $$ = $2; }
   ;
-
+  
 %%
 
 #include <ctype.h>
@@ -65,5 +65,5 @@ int main()
 #include <stdio.h>
 void yyerror(char const *s)
 {
-    fprintf(stderr, "%s\n", s);
+    fprintf(stderr, "%s\n", "silly mistake");
 }
